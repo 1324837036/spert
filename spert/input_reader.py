@@ -204,6 +204,7 @@ class JsonPredictionInputReader(BaseInputReader):
 
     def _parse_dataset(self, dataset_path, dataset):
         documents = json.load(open(dataset_path))
+        print(documents)
         for document in tqdm(documents, desc="Parse dataset '%s'" % dataset.label):
             self._parse_document(document, dataset)
 
@@ -213,6 +214,8 @@ class JsonPredictionInputReader(BaseInputReader):
         elif type(document) == dict:
             jtokens = document['tokens']
         else:
+            print("xxxxxxxxxxxxxxxxxxxxx",document)
+            print("##########",self._nlp)
             jtokens = [t.text for t in self._nlp(document)]
 
         # parse tokens
